@@ -31,3 +31,24 @@ public class SampleClass {
     }
 }
 ```
+### Pagination
+
+```
+For pagination, we added a PageCriteria class which can be used to specfict page, limit and offset values. 
+
+It has the following default values and is used for all Movie API calls
+
+limit=10
+page=1
+offset=0
+
+```
+
+### Filtering
+
+```
+For attribute filtering, we added MovieCriteria which can be used to specify attributes, symbols and values  
+It has the following default values and is used for all Movie API calls. 
+
+Filtering is optional
+```
