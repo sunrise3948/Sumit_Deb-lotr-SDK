@@ -1,5 +1,6 @@
 package com.liblab.lotrsdk;
 
+import com.liblab.lotrsdk.config.PageCriteria;
 import com.liblab.lotrsdk.config.RestClient;
 import com.liblab.lotrsdk.model.Movie;
 import com.liblab.lotrsdk.model.Movies;
@@ -27,10 +28,10 @@ public class LotrApp {
      * @param id
      * @return
      */
-    public Movie getMovieById(int id) {
+    public Movie getMovieById(int id, PageCriteria criteria) {
         return restClient.getClient()
                 .target(REST_URI)
-                .path(String.valueOf(id))
+                .path(String.valueOf(id)).path(criteria.getCriteria())
                 .request(MediaType.APPLICATION_JSON)
                 .header("Authorization", apiKey)
                 .get(Movie.class);
@@ -40,10 +41,10 @@ public class LotrApp {
      * @param id
      * @return
      */
-    public List<String> getMovieQuote(int id) {
+    public List<String> getMovieQuote(int id, PageCriteria criteria) {
         return restClient.getClient()
                 .target(REST_URI)
-                .path(String.valueOf(id))
+                .path(String.valueOf(id)).path(criteria.getCriteria())
                 .request(MediaType.APPLICATION_JSON)
                 .header("Authorization", apiKey)
                 .get(Movie.class).getQuotes();
@@ -52,9 +53,9 @@ public class LotrApp {
      * method to fetch all movies from the LOTR one movie API
      * @return
      */
-    public List<Movie> getAllMovies() {
+    public List<Movie> getAllMovies(PageCriteria criteria, Movie.MovieCriteria movieCriteria) {
             Response response = restClient.getClient()
-                .target(REST_URI)
+                .target(REST_URI).path(criteria.getCriteria()).path(movieCriteria.getCriteria())
                 .request(MediaType.APPLICATION_JSON)
                 .header("Authorization", apiKey)
                 .get();
